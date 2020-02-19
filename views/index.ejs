@@ -4,10 +4,24 @@
 <html>
   <head>
       <% include ./header.ejs %>
+      <style>
+        
+        </style>
   </head>
   <body>
-    <% include ./sidebar.ejs %>
-    <% include ./body.ejs %>
-
+    <div id="container">
+      <div id="header">
+        <h1>Responsive Layout</h1>
+      </div>
+      <div id="sidebar">
+        <% include ./sidebar.ejs %>
+      </div>
+      <div id="content">
+        <% include ./body.ejs %>
+      </div>
+      <div id="footer">
+          <p>Copyright</p>
+        </div>
+    </div>
   </body>
 </html>
