@@ -22,10 +22,11 @@ a {
 #nav > a {
   display: none;
   position: absolute;
-  top: 10px;
+  top: 0;
   left: 10px;
   width: 60px;
-  line-height: 60px;
+  margin: auto;
+  vertical-align: center;
   text-align: center;
 }
 
@@ -34,13 +35,12 @@ a {
   height: 30px;
 }
 
-#nav > h1 {
-  
+#nav > h2 {
   position: absolute;
-  top: 10px;
+  top: -20px;
   left: 10px;
+  float: right;
   text-align: center;
-
 }
 
 
@@ -93,6 +93,13 @@ a {
   
   #nav > a {
     display: block
+  }
+
+  #nav > h2 {
+    top: -10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    text-align: center;
   }
 
   #content {
