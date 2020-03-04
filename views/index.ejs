@@ -6,14 +6,17 @@
       <% include header %>
   </head>
   <body>
-    <div id="nav">
-      <% include nav %>
-    </div>
-    <div id="content">
-      <%- include(body) -%>
-    </div>
-    <div id="sidebar">
-      <% include sidebar %>
-    </div>
+    <div data-role="page" id="pageone">
+      <div id="nav">
+        <% include nav %>
+      </div>
+      <div id="content">
+        <%- include(body) -%>
+      </div>
+      <div id="sidebar">
+        <% include sidebar %>
+      </div>
+    </div> 
+
   </body>
 </html>

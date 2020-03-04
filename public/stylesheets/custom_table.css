@@ -1,0 +1,24 @@
+
+/* 테이블 디자인 */
+table {	width:100%;	text-align:center;	border-collapse:collapse;}
+table th { background:linear-gradient(#333333 0%, #444444 100%); color:#FFFFFF; font-weight:bold; height:60px; font-size:20px; }
+table td { height:40px; }
+
+/* 홀수행 백그루안드 색상 */
+tr:nth-child(even) td { background:#EEEEEE; }
+
+/* 짝수행 백그루안드 색상 */	
+tr:nth-child(odd) td { background:#FDFDFD; }
+
+@media (max-width:1250px) {
+	/* 화면의 사이즈가 560px 이하일 경우 table의 텍스트를 가운데 정렬 한다.*/
+	.ui-responsive th, .ui-responsive td {
+		text-align:center;
+	}
+}
+@media (max-width:700px) {
+	/* 화면의 사이즈가 560px 이하일 경우 table의 텍스트를 가운데 정렬 한다.*/
+	.ui-responsive th, .ui-responsive td {
+		text-align:right;
+	}
+}

@@ -22,8 +22,8 @@ a {
 #nav > a {
   display: none;
   position: absolute;
-  top: 0;
-  left: 10px;
+  top: 10px;
+  left: 0;
   width: 60px;
   margin: auto;
   vertical-align: center;
@@ -89,7 +89,7 @@ a {
   }
 }
 
-@media ( max-width: 600px ) {
+@media ( max-width: 35em ) {
   
   #nav > a {
     display: block
