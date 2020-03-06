@@ -28,7 +28,7 @@ router.get('/standard', function(req, res, next) {
 
 router.get('/asset', function(req, res, next) {
   // 자산현황
-  res.render('asset', { title: 'asset', body: 'asset' });
+  res.render('index', { title: 'asset', body: 'asset' });
 });
 
 
