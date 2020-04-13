@@ -1,6 +1,27 @@
 var express = require('express');
 var router = express.Router();
 
+
+var mysql_dbc = require('../config/database')();
+var connection = mysql_dbc.init();
+
+mysql_dbc.open(connection);
+
+router.get('/dbtest', function(req, res){
+  var sql = 'SELECT * FROM `withdrawals`';
+
+  connection.query(sql, function (error, results, fields) {
+    if (error) {
+        console.log(error);
+    }
+    console.log(results);    
+  });
+  
+
+});
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Household Account', body: 'home' });
