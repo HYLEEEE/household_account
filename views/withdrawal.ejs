@@ -30,6 +30,24 @@
             <td>1년</td>
             <td>이율 높은 적금</td>
         </tr>
+        <% dataList.forEach(function(item, index) { %>
+            <tr>
+                <td><%= item.id %></td>
+                <td><%= item.created_at %></td>
+                <td><%= item.account_id %></td>
+                <td><%= item.user_id %></td>
+                <td><%= item.contents %></td>
+                <td><%= item.dealer %></td>
+                <!-- 추후 설정-->
+                <td><%= item.bankaccount_id %></td>
+                <td><%= item.bankaccount_id %></td>
+                <td><%= item.price_type %></td>
+                <td><%= item.price %></td>
+            </tr>
+            
+            
+        <%}); %>
+    
 
     </tbody>
 </table>

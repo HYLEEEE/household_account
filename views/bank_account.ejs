@@ -6,40 +6,31 @@
 <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="dataTable">
     <thead>
         <tr>
-            <th data-priority="6">No</th>
-            <th data-priority="2">정기/비정기</th>
-            <th>계정이름</th>
-            <th data-priority="1">설명</th>
-            <th data-priority="5">달 기준금액</th>
-            <th data-priority="3">현월 계</th>
-            <th data-priority="4">누계</th>
+            <th data-priority="7">No</th>
+            <th data-priority="1">계좌번호</th>
+            <th data-priority="2">소유자</th>
+            <th>은행계좌이름</th>
+            <th>계좌이름</th>
+            <th data-priority="5">설명</th>
+            <th data-priority="6">예금 종류</th>
         </tr>
     </thead>
     <tbody>
-        
-        <tr>
-            <td>1</td>
-            <td>정기</td>
-            <td>계정이름</td>
-            <td>계정 설명</td>
-            <td>100,000원</td>
-            <td>0원</td>
-            <td>0원</td>
-        </tr>
         <% dataList.forEach(function(item, index) { %>
             <tr>
                 <td><%= item.id %></td>
-                <td><%= item.routine_type %></td>
-                <td><%= item.account_name %></td>
+                <td><%= item.account_number %></td>
+                <td><%= item.user_id %></td>
+                <td><%= item.bank_account_name %></td>
+                <td><%= item.name %></td>
                 <td><%= item.contents %></td>
-                <td><%= item.monthly_price %></td>
                 <!-- 추후 설정-->
-                <td><%= item.monthly_price %></td>
-                <td><%= item.monthly_price %></td>
+                <td><%= item.account_type %></td>
             </tr>
             
             
         <%}); %>
     
+
     </tbody>
 </table>

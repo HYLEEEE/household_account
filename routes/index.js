@@ -7,20 +7,6 @@ var connection = mysql_dbc.init();
 
 mysql_dbc.open(connection);
 
-router.get('/dbtest', function(req, res){
-  var sql = 'SELECT * FROM `withdrawals`';
-
-  connection.query(sql, function (error, results, fields) {
-    if (error) {
-        console.log(error);
-    }
-    console.log(results);    
-  });
-  
-
-});
-
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -29,12 +15,28 @@ router.get('/', function(req, res, next) {
 
 router.get('/withdrawal', function(req, res, next) {
   // 입출금
-  res.render('index', { title: 'withdrawal', body: 'withdrawal' });
+  var sql = 'SELECT * FROM `withdrawals`';
+
+  connection.query(sql, function (error, results, fields) {
+    if (error) {
+        console.log(error);
+    }
+    res.render('index', { title: 'withdrawal', body: 'withdrawal', dataList: results });
+//    res.send(ejs.render(data, {prodList: results}));    
+  });
+  
 });
 
-router.get('/account', function(req, res, next) {
+router.get('/bank_account', function(req, res, next) {
   // 계좌 리스트
-  res.render('index', { title: 'account', body: 'account' });
+  var sql = 'SELECT * FROM `bank_accounts`';
+
+  connection.query(sql, function (error, results, fields) {
+    if (error) {
+        console.log(error);
+    }
+    res.render('index', { title: 'bank_account', body: 'bank_account', dataList: results  });
+  });
 });
 
 router.get('/saving', function(req, res, next) {
@@ -44,7 +46,14 @@ router.get('/saving', function(req, res, next) {
 
 router.get('/standard', function(req, res, next) {
   // 기준 항목
-  res.render('index', { title: 'standard', body: 'standard' });
+  var sql = 'SELECT * FROM `accounts`';
+
+  connection.query(sql, function (error, results, fields) {
+    if (error) {
+        console.log(error);
+    }
+    res.render('index', { title: 'standard', body: 'standard', dataList: results });
+  });
 });
 
 router.get('/asset', function(req, res, next) {
