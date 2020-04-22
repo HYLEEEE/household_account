@@ -3,17 +3,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <% include ./header.ejs %>
+      <% include header %>
   </head>
   <body>
-    <div id="nav">
-      <% include ./nav.ejs %>
-    </div>
-    <div id="content">
-      <% include ./home.ejs %>
-    </div>
-    <div id="sidebar">
-      <% include ./sidebar.ejs %>
-    </div>
+    <div data-role="page" id="pageone">
+      <div id="nav">
+        <% include nav %>
+      </div>
+      <div id="content" data-role="main" class="ui-content">
+        <%- include(body) -%>
+      </div>
+      <div id="sidebar">
+        <% include sidebar %>
+      </div>
+    </div> 
+
   </body>
 </html>

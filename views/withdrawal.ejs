@@ -1,6 +1,53 @@
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
-<!--
+<p>입출금</p>
+<p>In this example we have used the well-known Northwind sample database. Below is a selection from the "Customers"
+    table.</p>
+<p>Try to resize the width of your browser window, to see the effect.</p>
+<table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="dataTable">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th data-priority="8">Date</th>
+            <th data-priority="1">계정</th>
+            <th>사용자</th>
+            <th data-priority="2">내용</th>
+            <th data-priority="6">구매처</th>
+            <th data-priority="3">계좌 종류</th>
+            <th data-priority="4">계좌 이름</th>
+            <th data-priority="5">종류</th>
+            <th data-priority="7">금액</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>적금</td>
+            <td>하나_더_적금</td>
+            <td>메인_통장</td>
+            <td>123-456789-12345</td>
+            <td>하나은행</td>
+            <td>정액적립식</td>
+            <td>5.01%</td>
+            <td>1년</td>
+            <td>이율 높은 적금</td>
+        </tr>
+        <% dataList.forEach(function(item, index) { %>
+            <tr>
+                <td><%= item.id %></td>
+                <td><%= item.created_at %></td>
+                <td><%= item.account_id %></td>
+                <td><%= item.user_id %></td>
+                <td><%= item.contents %></td>
+                <td><%= item.dealer %></td>
+                <!-- 추후 설정-->
+                <td><%= item.bankaccount_id %></td>
+                <td><%= item.bankaccount_id %></td>
+                <td><%= item.price_type %></td>
+                <td><%= item.price %></td>
+            </tr>
+            
+            
+        <%}); %>
+    
 
-    <p>UserID: <%= //request.userId %></p>
--->
+    </tbody>
+</table>

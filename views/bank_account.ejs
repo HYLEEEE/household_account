@@ -1,0 +1,36 @@
+<p>Reflow Tables lay the table data horizontally until it reaches a minimum size, then all rows are grouped together
+    in a vertical stack with the corresponding labels.</p>
+<p>In this example we have used the well-known Northwind sample database. Below is a selection from the "Customers"
+    table.</p>
+<p>Try to resize the width of your browser window, to see the effect.</p>
+<table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="dataTable">
+    <thead>
+        <tr>
+            <th data-priority="7">No</th>
+            <th data-priority="1">계좌번호</th>
+            <th data-priority="2">소유자</th>
+            <th>은행계좌이름</th>
+            <th>계좌이름</th>
+            <th data-priority="5">설명</th>
+            <th data-priority="6">예금 종류</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% dataList.forEach(function(item, index) { %>
+            <tr>
+                <td><%= item.id %></td>
+                <td><%= item.account_number %></td>
+                <td><%= item.user_id %></td>
+                <td><%= item.bank_account_name %></td>
+                <td><%= item.name %></td>
+                <td><%= item.contents %></td>
+                <!-- 추후 설정-->
+                <td><%= item.account_type %></td>
+            </tr>
+            
+            
+        <%}); %>
+    
+
+    </tbody>
+</table>
