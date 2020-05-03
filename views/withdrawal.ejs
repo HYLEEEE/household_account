@@ -1,53 +1,169 @@
-<p>입출금</p>
+<h1>입출금</h1>
 <p>In this example we have used the well-known Northwind sample database. Below is a selection from the "Customers"
     table.</p>
 <p>Try to resize the width of your browser window, to see the effect.</p>
-<table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="dataTable">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th data-priority="8">Date</th>
-            <th data-priority="1">계정</th>
-            <th>사용자</th>
-            <th data-priority="2">내용</th>
-            <th data-priority="6">구매처</th>
-            <th data-priority="3">계좌 종류</th>
-            <th data-priority="4">계좌 이름</th>
-            <th data-priority="5">종류</th>
-            <th data-priority="7">금액</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>적금</td>
-            <td>하나_더_적금</td>
-            <td>메인_통장</td>
-            <td>123-456789-12345</td>
-            <td>하나은행</td>
-            <td>정액적립식</td>
-            <td>5.01%</td>
-            <td>1년</td>
-            <td>이율 높은 적금</td>
-        </tr>
-        <% dataList.forEach(function(item, index) { %>
-            <tr>
-                <td><%= item.id %></td>
-                <td><%= item.created_at %></td>
-                <td><%= item.account_id %></td>
-                <td><%= item.user_id %></td>
-                <td><%= item.contents %></td>
-                <td><%= item.dealer %></td>
-                <!-- 추후 설정-->
-                <td><%= item.bankaccount_id %></td>
-                <td><%= item.bankaccount_id %></td>
-                <td><%= item.price_type %></td>
-                <td><%= item.price %></td>
-            </tr>
-            
-            
-        <%}); %>
-    
 
-    </tbody>
-</table>
+<div class="col-md-3">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#addModel">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+</div>
+<div class="row">
+
+
+    <form class="form-lnline" action="/withdrawal">
+        <div class="form-group">
+            <label for="sel1">year</label>
+            <select class="form-control" id="sel1" name="sellist1">
+                <option>2019</option>
+                <option>2020</option>
+                <option>2021</option>
+                <option>2022</option>
+                <option>2023</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel2">month</label>
+            <select class="form-control" id="sel2" name="sellist2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">제출</button>
+        
+    </form>
+    
+    
+</div>
+    
+<div class="table-responsive">
+    <table class="table" id="dataTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Date</th>
+                <th>계정</th>
+                <th>사용자</th>
+                <th>내용</th>
+                <th>구매처</th>
+                <th>계좌 종류</th>
+                <th>계좌 이름</th>
+                <th>종류</th>
+                <th>금액</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% dataList.forEach(function(item, index) { %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td>
+                        <% var dateStr = item.created_at; %>
+                        <% var format = new Date(dateStr); %>
+
+                        <% var year = format.getFullYear(); %>
+                        <% var month = format.getMonth() + 1; %>
+                        <% if(month<10) month = '0' + month; %>
+                        <% var date = format.getDate(); %>
+                        <% if(date<10) date = '0' + date; %>
+                        <% var hour = format.getHours(); %>
+                        <% if(hour<10) hour = '0' + hour; %>
+                        <% var min = format.getMinutes(); %>
+                        <% if(min<10) min = '0' + min; %>
+                        <% var sec = format.getSeconds(); %>
+                        <% if(sec<10) sec = '0' + sec; %>
+                        <%= year + "-" + month + "-" + date + " " + hour + ":" + min + ":" + sec; %>
+                    </td>
+                    <td><%= item.account_name %></td>
+                    <td><%= item.username %></td>
+                    <td><%= item.contents %></td>
+                    <td><%= item.dealer %></td>
+                    <!-- 추후 설정-->
+                    <td>
+                        <% if(item.account_type == 0){ %>
+                            입출금 통장
+                        <% } else if(item.account_type == 1){ %>
+                            예적금 통장
+                        <% } %>
+                    </td>
+        
+                    <td><%= item.bank_account_name %></td>
+                    <td>
+                        <% if(item.price_type == 0){ %>
+                            입금
+                        <% } else if(item.price_type == 1){ %>
+                            출금
+                        <% } else { %>
+                            직접사용
+                        <% } %>
+                    </td>
+                    <td><%= item.price %> 원</td>
+                </tr>
+            <%}); %>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Add Modal -->
+<div class="modal fade" id="addModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">입출금 내역 추가하기</h4>
+            </div>
+            <div class="modal-body">
+                <form action="withdrawal/add">
+                    <div class="form-group">
+                        <label for="account_name">계정항목</label>
+                        <input type="input" class="form-control" id="account_name" placeholder="이메일을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_name">사용자</label>
+                        <input type="input" class="form-control" id="user_name" placeholder="암호">
+                    </div>
+                    <div class="form-group">
+                            <label for="contents">내용</label>
+                            <input type="input" class="form-control" id="contents" placeholder="내용">
+                    </div>
+                    <div class="form-group">
+                        <label for="dealer">구매처</label>
+                        <input type="input" class="form-control" id="dealer" placeholder="구매처">
+                    </div>
+                    <div class="form-group">
+                            <label for="bank_account_type">계좌 종류</label>
+                            <input type="input" class="form-control" id="bank_account_type" placeholder="계좌 종류">
+                    </div>
+                    <div class="form-group">
+                            <label for="bank_account_name">계좌 이름</label>
+                            <input type="input" class="form-control" id="bank_account_name" placeholder="계좌 이름">
+                    </div>        
+                    <div class="form-group">
+                            <label for="price_type">종류</label>
+                            <input type="input" class="form-control" id="price_type" placeholder="종류">
+                    </div>        
+                    <div class="form-group">
+                            <label for="price">금액</label>
+                            <input type="input" class="form-control" id="price" placeholder="금액">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">제출</button>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+
