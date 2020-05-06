@@ -1,4 +1,21 @@
-<a href="javascript:void(0);" id="toggleBtn" onclick="toggleSidebar()">
-    <img src="/image/menu-button-of-three-horizontal-lines.png">
-</a>
-<h2><%= title%></h2>
+<button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+    <span class="hamb-top"></span>
+    <span class="hamb-middle"></span>
+    <span class="hamb-bottom"></span>
+</button>
+
+<h2 class="title is-closed">
+    <% if(title == 'withdrawal'){ %>
+    입출금
+    <% } else if(title == 'bank_account'){ %>
+    계좌/카드
+    <% } else if(title == 'saving'){ %>
+    적금
+    <% } else if(title == 'standard'){ %>
+    기준값
+    <% } else if(title == 'asset'){ %>
+    자산현황
+    <% } else { %>
+    직접사용
+    <% } %>
+</h2>
