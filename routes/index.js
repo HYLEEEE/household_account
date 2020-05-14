@@ -31,8 +31,16 @@ router.get('/withdrawal', function (req, res, next) {
 });
 
 router.get('/withdrawal/add', function (req, res, next) {
-  // 입출금
-  var sql = 'SELECT `withdrawals`.*, `accounts`.`account_name`, `bank_accounts`.`bank_account_name`, `bank_accounts`.`account_type` FROM `withdrawals` JOIN `accounts` ON `withdrawals`.`account_id`=`accounts`.`id` JOIN `bank_accounts` ON `withdrawals`.`bank_account_id`=`bank_accounts`.`id` ORDER BY `id` DESC';
+  // 입출금 추가
+  var account_id = req.query.account_id;
+  var user_id = req.query.user_id;
+  var contents = req.query.contents;
+  var dealer = req.query.dealer;
+  var bank_account_id = req.query.bank_account_id;
+  var price = req.query.price;
+  var price_type = req.query.price_type;
+
+  var sql = 'INSERT INTO `withdrawals`( `account_id`, `user_id`, `contents`, `dealer`, `bank_account_id`, `price`, `price_type`) VALUES (' + account_id + ', ' + user_id + ', " + contents + ", " + dealer + ", ' + bank_account_id + ', ' + price + ', ' + price_type + ')';
 
   connection.query(sql, function (error, results, fields) {
     if (error) {

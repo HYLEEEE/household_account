@@ -1,15 +1,6 @@
-<div class="row">
-    <div class="col-md-3">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal"
-            data-target="#addModel">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        </button>
-    </div>
-</div>
 
-<div class="col-md-3">
-    <form class="form-inline" action="/withdrawal">
+<div class="button-view">
+    <form class="form-inline inline" action="/withdrawal">
         <div class="form-group ">
             <label for="sel1">year</label>
             <select class="form-control" id="sel1" name="year">
@@ -38,9 +29,18 @@
         </div>
         <button type="submit" class="btn btn-primary">검색</button>
     </form>
+
+    <!-- Button trigger modal -->
+    <div class="button-add inline">
+        <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal"
+            data-target="#addModel">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+    </div>
 </div>
 
-<div class="table-responsive">
+
+<div class="table-div table-responsive">
     <table class="table" id="dataTable">
         <thead>
             <tr>
