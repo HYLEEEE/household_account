@@ -6,6 +6,14 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var assetRouter = require('./routes/asset');
+var bank_accountRouter = require('./routes/bank_account');
+var savingRouter = require('./routes/saving');
+var standardRouter = require('./routes/standard');
+var withdrawalRouter = require('./routes/withdrawal');
+
+var mysql_dbc = require('./config/database')();
+var connection = mysql_dbc.init();
 
 var app = express();
 
@@ -21,13 +29,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/withdrawal', withdrawalRouter);
+app.use('/asset', assetRouter);
+app.use('/bank_account', bank_accountRouter);
+app.use('/saving', savingRouter);
+app.use('/standard', standardRouter);
 
+mysql_dbc.open(connection);
 
-// Make our db accessible to our router
-app.use(function(req, res, next){
-  req.connection = connection;
-  next();
-});
 
 // error handler
 app.use(function(err, req, res, next) {
