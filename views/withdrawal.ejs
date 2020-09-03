@@ -1,30 +1,36 @@
 
 <div class="button-view">
     <form class="form-inline inline" action="/withdrawal">
+        <% var today = new Date(); %>
         <div class="form-group ">
             <label for="sel1">year</label>
             <select class="form-control" id="sel1" name="year">
-                <option>2020</option>
-                <option>2021</option>
-                <option>2022</option>
-                <option>2023</option>
+                <% var today_year = today.getFullYear(); %>
+                <% var year = 2019; %>
+                <% while(year <= today_year){ %>
+                    <% if(year == today_year){ %>
+                        <option selected> <%= year %> </option>
+                    <% } else{ %>
+                        <option><%= year %></option>
+                    <% } %>
+                    <% year++; %>
+                <% } %>
             </select>
         </div>
         <div class="form-group ">
             <label for="sel2">month</label>
             <select class="form-control" id="sel2" name="month">
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-                <option>05</option>
-                <option>06</option>
-                <option>07</option>
-                <option>08</option>
-                <option>09</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
+                <% var today_month = today.getMonth()+1%>
+                <% today_month = today_month<10 ? '0'+today_month : today_month; %>
+                <% var monthAry = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'] %>
+                <% for( var mon of monthAry) {   %>
+                    <% if(mon == today_month){ %>
+                        <option selected> <%= mon %> </option>
+                    <% } else{ %>
+                        <option><%= mon %></option>
+                    <% } %>
+                <% } %>
+
             </select>
         </div>
         <button type="submit" class="btn btn-primary">검색</button>
@@ -32,7 +38,7 @@
 
     <!-- Button trigger modal -->
     <div class="button-add inline">
-        <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal"
+        <button type="button" id="addModelBtn" class="btn btn-default" aria-label="Left Align" data-toggle="modal"
             data-target="#addModel">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
@@ -116,30 +122,34 @@
                 <h4 class="modal-title" id="myModalLabel">입출금 내역 추가하기</h4>
             </div>
             <div class="modal-body">
-                <form action="withdrawal/add">
+                <form action="/withdrawal/add" method="POST" name="addModel">
                     <div class="form-group">
-                        <label for="account_name">계정항목</label>
-                        <input type="input" class="form-control" id="account_name" placeholder="이메일을 입력하세요">
+                        <label for="standard_id">기준값 항목</label>
+                        <select class="form-control" id="standard_id" name="standard_id" placeholder="기준값 이름">
+                                    
+                        </select>
+
                     </div>
                     <div class="form-group">
-                        <label for="user_name">사용자</label>
-                        <input type="input" class="form-control" id="user_name" placeholder="암호">
+                        <label for="user_id">사용자</label>
+                        <select class="form-control" id="user_id" name="user_id" placeholder="사용자 이름">
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="contents">내용</label>
-                        <input type="input" class="form-control" id="contents" placeholder="내용">
+                        <input type="input" class="form-control" id="contents" name="contents" placeholder="내용">
                     </div>
                     <div class="form-group">
                         <label for="dealer">구매처</label>
-                        <input type="input" class="form-control" id="dealer" placeholder="구매처">
+                        <input type="input" class="form-control" id="dealer" name="dealer" placeholder="구매처">
                     </div>
                     <div class="form-group">
                         <label for="bank_account_type">계좌 종류</label>
-                        <input type="input" class="form-control" id="bank_account_type" placeholder="계좌 종류">
+                        <input type="input" class="form-control" id="bank_account_type" name="bank_account_type" placeholder="계좌 종류">
                     </div>
                     <div class="form-group">
                         <label for="bank_account_name">계좌 이름</label>
-                        <input type="input" class="form-control" id="bank_account_name" placeholder="계좌 이름">
+                        <input type="input" class="form-control" id="bank_account_name" name="bank_account_name" placeholder="계좌 이름">
                     </div>
                     <div class="form-group">
                         <label for="price_type">종류</label>
@@ -147,13 +157,13 @@
                     </div>
                     <div class="form-group">
                         <label for="price">금액</label>
-                        <input type="input" class="form-control" id="price" placeholder="금액">
+                        <input type="input" class="form-control" id="price" name="price" placeholder="금액">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">제출</button>
+                <button type="button" class="btn btn-primary" onclick="goAddSubmit();">제출</button>
             </div>
 
         </div>
