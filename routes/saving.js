@@ -8,7 +8,22 @@ var connection = mysql_dbc.init();
 
 router.get('/', function (req, res, next) {
     // 적금
-    res.render('index', { title: 'saving', body: 'saving' });
+//    res.render('index', { title: 'saving', body: 'saving' });
+
+
+
+    var sql = 'SELECT * FROM `saving` ';
+
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        console.log(error);
+      }
+      console.log(sql);
+      console.log(results);
+      res.render('index', { title: 'saving', body: 'saving', dataList: results });
+      //    res.send(ejs.render(data, {prodList: results}));    
+    });
+
   });
 
 
