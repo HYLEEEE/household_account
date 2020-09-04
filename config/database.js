@@ -5,7 +5,6 @@ module.exports = function () {
     init: function () {
       return mysql.createConnection({
 
-        
         // 내부
         host: '172.30.1.16',
         port: '3306',
@@ -15,7 +14,7 @@ module.exports = function () {
 
         /*
         // 외부
-        host: '121.128.189.63',
+        host: '221.147.114.120',
         port: '5111',
         user: 'leehy',
         password: 'qwe123!@#',
