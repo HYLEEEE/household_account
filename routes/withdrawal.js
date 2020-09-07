@@ -9,10 +9,18 @@ var connection = mysql_dbc.init();
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-      // 입출금
-  var year = req.query.year;
-  var month = req.query.month;
-  var date_str = year + '-' + month;
+  // 입출금
+  if(req.query.year == undefined){
+    var today = new Date();
+    year = today.getFullYear();
+    month = today.getMonth()+1;
+    month = month<10 ? '0'+month : month;  
+  } else {    
+    year = req.query.year;
+    month = req.query.month;
+  }
+  date_obj = {'year':year, 'month':month}
+  date_str = year + '-' + month;
 
   var sql = 'SELECT `withdrawals`.*, \
    `standards`.`name`, `bank_accounts`.`bank_account_name`, \
@@ -28,7 +36,8 @@ router.get('/', function (req, res, next) {
     if (error) {
       console.log(error);
     }
-    res.render('index', { title: 'withdrawal', body: 'withdrawal', dataList: results });
+    obj = {'results': results, 'date':date_obj}
+    res.render('index', { title: 'withdrawal', body: 'withdrawal', dataList: obj});
     //    res.send(ejs.render(data, {prodList: results}));    
   });
 
