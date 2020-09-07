@@ -2,8 +2,14 @@
 <div class="button-view">
     <form class="form-inline inline" action="/withdrawal">
         <% var today = new Date(); %>
-        <% var year = dataList.date.year %>
-        <% var month = dataList.date.month %>
+        <% if(dataList.date == undefined){ %>
+            <% year = today.getFullYear(); %>
+            <% month = today.getMonth()+1; %>
+            <% month = month<10 ? '0'+month : month;  %>
+        <% } else {    %>
+            <% year = dataList.date.year %>
+            <% month = dataList.date.month %>
+            <% } %>
         <div class="form-group ">
             <label for="sel1">year</label>
             <select class="form-control" id="sel1" name="year">
@@ -121,7 +127,7 @@
                 <h4 class="modal-title" id="myModalLabel">입출금 내역 추가하기</h4>
             </div>
             <div class="modal-body">
-                <form action="/withdrawal/add" method="POST" name="addModel">
+                <form method="POST" id="addModel_form" name="addModel">
                     <div class="form-group">
                         <label for="standard_id">기준값 항목</label>
                         <select class="form-control" id="standard_id" name="standard_id" placeholder="기준값 이름">
@@ -143,26 +149,27 @@
                         <input type="input" class="form-control" id="dealer" name="dealer" placeholder="구매처">
                     </div>
                     <div class="form-group">
-                        <label for="bank_account_type">계좌 종류</label>
-                        <input type="input" class="form-control" id="bank_account_type" name="bank_account_type" placeholder="계좌 종류">
-                    </div>
-                    <div class="form-group">
-                        <label for="bank_account_name">계좌 이름</label>
-                        <input type="input" class="form-control" id="bank_account_name" name="bank_account_name" placeholder="계좌 이름">
+                        <label for="bank_account_id">계좌 이름</label>
+                        <select class="form-control" id="bank_account_id" name="bank_account_id" placeholder="계좌 이름">
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="price_type">종류</label>
-                        <input type="input" class="form-control" id="price_type" placeholder="종류">
+                        <select type="input" class="form-control" id="price_type" name="price_type" placeholder="종류">
+                            <option value="0">입금</option>
+                            <option value="1">출금</option>
+                            <option value="2">직접사용</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="price">금액</label>
-                        <input type="input" class="form-control" id="price" name="price" placeholder="금액">
+                        <input type="number" class="form-control" id="price" name="price" placeholder="금액">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="goAddSubmit();">제출</button>
+                <button type="button" class="btn btn-primary" onclick="goAddSubmit();">추가</button>
             </div>
 
         </div>

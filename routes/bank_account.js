@@ -20,4 +20,22 @@ router.get('/', function (req, res, next) {
 });
 
 
+
+
+
+
+
+
+router.post('/', function (req, res, next) {
+  // 기준 항목
+  var sql = 'SELECT * FROM `bank_accounts`';
+  console.log(sql);
+  connection.query(sql, function (error, results, fields) {
+    console.log(results)
+    res.send(results)
+  });
+});
+
+
+
 module.exports = router;

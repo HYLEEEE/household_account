@@ -46,7 +46,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/add', function (req, res, next) {
     // 입출금 추가
-    var account_id = req.body.account_id;
+    var standard_id = req.body.standard_id;
     var user_id = req.body.user_id;
     var contents = req.body.contents;
     var dealer = req.body.dealer;
@@ -54,16 +54,13 @@ router.post('/add', function (req, res, next) {
     var price = req.body.price;
     var price_type = req.body.price_type;
   
-    var sql = 'INSERT INTO `withdrawals`( `account_id`, `user_id`, `contents`, `dealer`, `bank_account_id`, `price`, `price_type`) VALUES (' + account_id + ', ' + user_id + ', ' + contents + ', ' + dealer + ', ' + bank_account_id + ', ' + price + ', ' + price_type + ')';
+    var sql = 'INSERT INTO `withdrawals`( `standard_id`, `user_id`, `contents`, `dealer`, `bank_account_id`, `price`, `price_type`) VALUES (' + standard_id + ', ' + user_id + ', "' + contents + '", "' + dealer + '", ' + bank_account_id + ', ' + price + ', "' + price_type + '")';
 
     console.log(sql);
   
     connection.query(sql, function (error, results, fields) {
-      if (error) {
-        console.log(error);
-      }
-      res.render('index', { title: 'withdrawal', body: 'withdrawal', dataList: results });
-      //    res.send(ejs.render(data, {prodList: results}));    
+      console.log(results)
+      res.send(results) 
     });
   });
   
