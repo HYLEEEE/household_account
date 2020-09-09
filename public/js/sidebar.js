@@ -2,11 +2,16 @@ $(document).ready(function () {
   var trigger = $('.hamburger'),
     overlay = $('.overlay'),
     title = $('.title'),
+    sidebar = $('.sidebar a'),
     isClosed = false;
 
   trigger.click(function () {
     hamburger_cross();
   });
+
+  var title_value = $('.title').attr('name');  
+  $('.sidebar a.active').removeClass('active');
+  $('.'+title_value).addClass('active');;
 
   function hamburger_cross() {
 

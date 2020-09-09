@@ -1,7 +1,10 @@
 div#wrapper div#page-content-wrapper h2{
-    margin-left: 50px;
+    margin-left: 30px;
+    margin-top: 20px;
 }
 
-div.container div.button-view .inline { display: inline-block; margin: 10px; }
+div.container div.button-view .inline {  
+    display: inline-block; margin: 10px; 
+}
 div.container div.button-view .inline div.button-add { float: right; }
 div.container div.table-div { float: left; }
