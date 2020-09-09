@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser'); 
 
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var assetRouter = require('./routes/asset');
@@ -23,6 +25,13 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//jquery, bootstrap
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
+
+
+출처: https://jizard.tistory.com/102 [GEUMSON]
 
 // configure the app to use bodyParser()
 app.use(bodyParser.urlencoded({ 
