@@ -8,3 +8,24 @@ div.container div.button-view .inline {
 }
 div.container div.button-view .inline div.button-add { float: right; }
 div.container div.table-div { float: left; }
+
+
+div.button-view .btnline {
+    margin-left: 10px;
+}
+
+
+
+@media screen and (max-width: 700px) {
+    div.button-view .btnline {
+        margin-top: 16px;
+    }
+    
+}
+
+@media screen and (max-width: 400px) {
+
+}
+
+  
+  
