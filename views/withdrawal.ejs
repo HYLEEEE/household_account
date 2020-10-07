@@ -11,7 +11,7 @@
             <% month = dataList.date.month %>
             <% } %>
         <div class="form-group ">
-            <label for="sel1">year</label>
+            <label for="sel1">year:</label>
             <select class="form-control" id="sel1" name="year">
                 <% var this_year = 2019; %>
                 <% while(this_year <= year){ %>
@@ -25,7 +25,7 @@
             </select>
         </div>
         <div class="form-group ">
-            <label for="sel2">month</label>
+            <label for="sel2">month:</label>
             <select class="form-control" id="sel2" name="month">
                 <% var monthAry = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'] %>
                 <% for( var mon of monthAry) {   %>
@@ -38,12 +38,12 @@
 
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">검색</button>
+        <button type="submit" class="btn btn-primary btnline">검색</button>
     </form>
 
     <!-- Button trigger modal -->
     <div class="button-add inline">
-        <button type="button" id="addModelBtn" class="btn btn-primary" aria-label="Left Align" data-toggle="modal"
+        <button type="button" id="addModelBtn" class="btn btn-primary btnline" aria-label="Left Align" data-toggle="modal"
             data-target="#addModel">
             <i class="fas fa-plus-square"></i>
         </button>
@@ -116,7 +116,7 @@
                 <td><%= item.price %> 원</td>
                 <td>
                     <button type="button" class="btn btn-warning"
-                    data-toggle="modal" data-target="#updateModel">
+                    data-toggle="modal" data-target="#updateModel" onclick="updateWithdrawal(<%= item.id %>);">
                         <i class="fas fa-edit"></i>
                     </button>
                     <button type="button" class="btn btn-danger" data-toggle="modal"
@@ -200,33 +200,37 @@
             <div class="modal-body">
                 <form method="POST" id="updateModel_form" name="updateModel">
                     <div class="form-group">
+                        <label for="id">id</label>
+                        <input type="text" class="form-control" id="update_id" name="id" placeholder="id" readonly/>
+                    </div>                    
+                    <div class="form-group">
                         <label for="standard_id">기준값 항목</label>
-                        <select class="form-control" id="standard_id" name="standard_id" placeholder="기준값 이름">
+                        <input class="form-control" id="update_standard_id" name="standard_id" placeholder="기준값 이름"/>
                                     
                         </select>
 
                     </div>
                     <div class="form-group">
                         <label for="user_id">사용자</label>
-                        <select class="form-control" id="user_id" name="user_id" placeholder="사용자 이름">
+                        <select class="form-control" id="update_user_id" name="user_id" placeholder="사용자 이름">
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="contents">내용</label>
-                        <input type="input" class="form-control" id="contents" name="contents" placeholder="내용">
+                        <input type="input" class="form-control" id="update_contents" name="contents" placeholder="내용">
                     </div>
                     <div class="form-group">
                         <label for="dealer">구매처</label>
-                        <input type="input" class="form-control" id="dealer" name="dealer" placeholder="구매처">
+                        <input type="input" class="form-control" id="update_dealer" name="dealer" placeholder="구매처">
                     </div>
                     <div class="form-group">
                         <label for="bank_account_id">계좌 이름</label>
-                        <select class="form-control" id="bank_account_id" name="bank_account_id" placeholder="계좌 이름">
+                        <select class="form-control" id="update_bank_account_id" name="bank_account_id" placeholder="계좌 이름">
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="price_type">종류</label>
-                        <select type="input" class="form-control" id="price_type" name="price_type" placeholder="종류">
+                        <select type="input" class="form-control" id="update_price_type" name="price_type" placeholder="종류">
                             <option value="0">입금</option>
                             <option value="1">출금</option>
                             <option value="2">직접사용</option>
@@ -234,7 +238,7 @@
                     </div>
                     <div class="form-group">
                         <label for="price">금액</label>
-                        <input type="number" class="form-control" id="price" name="price" placeholder="금액">
+                        <input type="number" class="form-control" id="update_price" name="price" placeholder="금액">
                     </div>
                 </form>
             </div>

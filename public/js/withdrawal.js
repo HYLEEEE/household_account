@@ -82,8 +82,95 @@ function getBankAccountList(){
 }
 
 
+function getUpdateStandardsList(){
+    $.ajax({
+        type: 'POST',
+        url: '/standard',
+        error: function(error) {
+            console.log(error)
+        },
+        success: function(result) {
+            $('#update_standard_id').empty();
+            
+            for(var count = 0; count < result.length; count++){                
+                var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+"</option>");
+                $('#update_standard_id').append(option);
+            }
+        }
+    });
+}
+
+
+function getUpdateUsersList(){
+    $.ajax({
+        type: 'POST',
+        url: '/user',
+        error: function(error) {
+            console.log(error)
+        },
+        success: function(result) {
+            $('#update_user_id').empty();
+            
+            for(var count = 0; count < result.length; count++){                
+                var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+" : "+result[count]["username"]+"</option>");
+                $('#update_user_id').append(option);
+            }
+        }
+    });
+}
+
+
+function getUpdateBankAccountList(){
+    $.ajax({
+        type: 'POST',
+        url: '/bank_account',
+        error: function(error) {
+            console.log(error)
+        },
+        success: function(result) {
+            $('#update_bank_account_id').empty();
+            
+            for(var count = 0; count < result.length; count++){                
+                var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+" : "+result[count]["account_number"]+"</option>");
+                $('#update_bank_account_id').append(option);
+            }
+        }
+    });
+}
+
+
+
+
 function updateWithdrawal(id){
-    
+    getWithdrawal(id)
+    console.log(id);
+    $('#update_id').val(id);
+
+    getUpdateStandardsList();
+    getUpdateUsersList();
+    getUpdateBankAccountList();
+}
+
+function getWithdrawal(id){
+
+    $.ajax({
+        type: 'POST',
+        url: '/withdrawal/'+id,
+        error: function(error) {
+            console.log(error)
+        },
+        success: function(result) {
+            console.log(result);
+/*
+            $('#update_bank_account_id').empty();
+            
+            for(var count = 0; count < result.length; count++){                
+                var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+" : "+result[count]["account_number"]+"</option>");
+                $('#update_bank_account_id').append(option);
+            }
+            */
+        }
+    });
 }
 
 function deleteWithdrawal(id){

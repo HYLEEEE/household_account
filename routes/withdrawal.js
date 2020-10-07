@@ -44,6 +44,47 @@ router.get('/', function (req, res, next) {
 });
 
 
+
+/* GET home page. */
+router.post('/:id', function (req, res, next) {
+  id = req.params.id;
+  // 입출금
+  if(req.query.year == undefined){
+    var today = new Date();
+    year = today.getFullYear();
+    month = today.getMonth()+1;
+    month = month<10 ? '0'+month : month;  
+  } else {    
+    year = req.query.year;
+    month = req.query.month;
+  }
+  date_obj = {'year':year, 'month':month}
+  date_str = year + '-' + month;
+
+  var sql = 'SELECT `withdrawals`.*, \
+   `standards`.`name`, `bank_accounts`.`bank_account_name`, \
+   `bank_accounts`.`account_type`, `users`.`username` \
+   FROM `withdrawals` \
+   JOIN `users` ON `withdrawals`.`user_id`=`users`.`id` \
+   JOIN `standards` ON `withdrawals`.`standard_id`=`standards`.`id` \
+   JOIN `bank_accounts` ON `withdrawals`.`bank_account_id`=`bank_accounts`.`id` \
+   WHERE date_format(`created_at`, "%Y-%m") = "' + date_str + '" \
+   AND `withdrawals`.`id` = ' + id +' \
+   ORDER BY `id` DESC';
+
+  console.log(sql);
+  connection.query(sql, function (error, results, fields) {
+    if (error) {
+      console.log(error);
+    }
+    obj = {'results': results, 'date':date_obj}
+    res.send(obj);
+  });
+
+});
+
+
+
 router.post('/add', function (req, res, next) {
     // 입출금 추가
     var standard_id = req.body.standard_id;
