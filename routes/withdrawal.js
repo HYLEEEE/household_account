@@ -116,18 +116,18 @@ router.post('/update/:id', function (req, res, next) {
     var contents = req.body.contents;
     var dealer = req.body.dealer;
     var bank_account_id = req.body.bank_account_id;
-    var price = req.body.price;
+    var price =  req.body.price ? req.body.price : 0;
     var price_type = req.body.price_type;
 
 
     var sql = 'UPDATE `withdrawals` SET \
-    `standard_id`=' + standard_id + ', \
-    `user_id`=' + user_id + ', \
-    `contents`=' + contents + ', \
-    `dealer`= ' + dealer + ', \
-    `bank_account_id=' + bank_account_id + ', \
+    `standard_id`="' + standard_id + '", \
+    `user_id`="' + user_id + '", \
+    `contents`="' + contents + '", \
+    `dealer`= "' + dealer + '", \
+    `bank_account_id`="' + bank_account_id + '", \
     `price`=' + price + ', \
-    `price_type`=' + price_type + ' \
+    `price_type`="' + price_type + '" \
     WHERE `id`='+id;
 
     console.log(sql);

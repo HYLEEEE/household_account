@@ -107,7 +107,7 @@ function getBankAccountList(){
 }
 
 
-function getUpdateStandardsList(){
+function getUpdateStandardsList(id){
     $.ajax({
         type: 'POST',
         url: '/standard',
@@ -117,8 +117,11 @@ function getUpdateStandardsList(){
         success: function(result) {
             $('#update_standard_id').empty();
             
-            for(var count = 0; count < result.length; count++){                
+            for(var count = 0; count < result.length; count++){
                 var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+"</option>");
+                if(result[count]["id"] == id){
+                    option = $("<option value="+result[count]["id"]+" selected>"+result[count]["name"]+"</option>");
+                }
                 $('#update_standard_id').append(option);
             }
         }
@@ -126,7 +129,7 @@ function getUpdateStandardsList(){
 }
 
 
-function getUpdateUsersList(){
+function getUpdateUsersList(id){
     $.ajax({
         type: 'POST',
         url: '/user',
@@ -138,6 +141,9 @@ function getUpdateUsersList(){
             
             for(var count = 0; count < result.length; count++){                
                 var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+" : "+result[count]["username"]+"</option>");
+                if(result[count]["id"] == id){
+                    option = $("<option value="+result[count]["id"]+" selected>"+result[count]["name"]+" : "+result[count]["username"]+"</option>");
+                }
                 $('#update_user_id').append(option);
             }
         }
@@ -145,7 +151,7 @@ function getUpdateUsersList(){
 }
 
 
-function getUpdateBankAccountList(){
+function getUpdateBankAccountList(id){
     $.ajax({
         type: 'POST',
         url: '/bank_account',
@@ -155,8 +161,11 @@ function getUpdateBankAccountList(){
         success: function(result) {
             $('#update_bank_account_id').empty();
             
-            for(var count = 0; count < result.length; count++){                
+            for(var count = 0; count < result.length; count++){
                 var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+" : "+result[count]["account_number"]+"</option>");
+                if(result[count]["id"] == id){
+                    option = $("<option value="+result[count]["id"]+" selected>"+result[count]["name"]+" : "+result[count]["account_number"]+"</option>");
+                }
                 $('#update_bank_account_id').append(option);
             }
         }
@@ -172,9 +181,6 @@ function updateWithdrawal(id){
     console.log(id);
     $('#update_id').val(id);
 
-    getUpdateStandardsList();
-    getUpdateUsersList();
-    getUpdateBankAccountList();
 }
 
 function getWithdrawal(id){
@@ -188,14 +194,21 @@ function getWithdrawal(id){
         success: function(result) {
             console.log(result);
             // 가져온 값을 modal에 넣기
-/*
-            $('#update_bank_account_id').empty();
-            
-            for(var count = 0; count < result.length; count++){                
-                var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+" : "+result[count]["account_number"]+"</option>");
-                $('#update_bank_account_id').append(option);
-            }
-            */
+//            $('#update_bank_account_id').empty();
+            var data = result.results[0];
+
+
+            getUpdateStandardsList(data.standard_id);
+            getUpdateUsersList(data.user_id);
+            getUpdateBankAccountList(data.bank_account_id);
+        
+
+            $('#update_contents').val(data.contents);
+            $('#update_dealer').val(data.dealer);
+
+            $('#update_price').val(data.price);
+
+
         }
     });
 }
