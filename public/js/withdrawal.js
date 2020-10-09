@@ -1,4 +1,5 @@
 function goAddSubmit() {
+    // add 정보 보내기
     var formData = $("#addModel_form").serialize();    
     $.ajax({
 
@@ -16,6 +17,30 @@ function goAddSubmit() {
         }
     }); // $.ajax */
 }
+
+function goUpdateSubmit() {
+    //update 정보 보내기 
+    var formData = $("#updateModel_form").serialize();
+    console.log(formData);
+    var id = $("#update_id").val();
+    console.log(id);
+    $.ajax({
+
+        type: 'POST',
+        url: './withdrawal/update/'+id,
+        data : formData, 
+        error : function(error) {
+            console.log(error)
+            alert(error);
+        },
+        success : function(data) {
+            console.log(data)
+            alert("데이터 수정을 성공적으로 요청했습니다.")
+            location.href = location.href;
+        }
+    }); // $.ajax */
+}
+
 
 $(function() {
     $("#addModelBtn").click(function () {
@@ -142,6 +167,7 @@ function getUpdateBankAccountList(){
 
 
 function updateWithdrawal(id){
+    // 수정 모달을 띄워질 때 값 가져와서 채우기
     getWithdrawal(id)
     console.log(id);
     $('#update_id').val(id);
@@ -161,6 +187,7 @@ function getWithdrawal(id){
         },
         success: function(result) {
             console.log(result);
+            // 가져온 값을 modal에 넣기
 /*
             $('#update_bank_account_id').empty();
             
