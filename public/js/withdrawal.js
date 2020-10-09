@@ -42,6 +42,31 @@ function goUpdateSubmit() {
 }
 
 
+function goDeleteSubmit(id) {
+    //delete 정보 보내기 
+    var con_test = confirm("입출금을 삭제하시겠습니까?");
+    if(con_test == true){
+        $.ajax({
+            type: 'POST',
+            url: './withdrawal/delete/'+id,
+            error : function(error) {
+                console.log(error)
+                alert(error);
+            },
+            success : function(data) {
+                console.log(data)
+                alert("데이터 삭제를 성공적으로 요청했습니다.")
+                location.href = location.href;
+            }
+        }); // $.ajax */
+    }
+    else if(con_test == false){
+        alert("취소되었습니다.");
+    }
+}
+
+
+
 $(function() {
     $("#addModelBtn").click(function () {
         getStandardsList();
@@ -211,8 +236,4 @@ function getWithdrawal(id){
 
         }
     });
-}
-
-function deleteWithdrawal(id){
-    
 }

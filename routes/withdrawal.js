@@ -140,4 +140,20 @@ router.post('/update/:id', function (req, res, next) {
 });
 
 
+router.post('/delete/:id', function (req, res, next) {
+  id = req.params.id;
+
+  var sql = 'DELETE FROM `withdrawals` \
+  WHERE `id`='+id;
+
+  console.log(sql);
+
+  connection.query(sql, function (error, results, fields) {
+    console.log(results)
+    res.send(results) 
+  });
+
+});
+
+
 module.exports = router;
