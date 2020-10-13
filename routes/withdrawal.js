@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
 
 var mysql_dbc = require('../config/database')();
 var connection = mysql_dbc.init();

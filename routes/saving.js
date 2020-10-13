@@ -10,9 +10,11 @@ router.get('/', function (req, res, next) {
     // 적금
 //    res.render('index', { title: 'saving', body: 'saving' });
 
-
-
-    var sql = 'SELECT * FROM `saving` ';
+    var sql = 'SELECT `savings`.*, \
+    `bank_accounts`.`bank_account_name`, `bank_accounts`.`name` AS `bank_account_name`  \
+    FROM `savings` \
+    JOIN `bank_accounts` ON `savings`.`expend_bank_account_id`=`bank_accounts`.`id` \
+    ORDER BY `id` DESC';
 
     connection.query(sql, function (error, results, fields) {
       if (error) {
@@ -28,3 +30,5 @@ router.get('/', function (req, res, next) {
 
 
 module.exports = router;
+
+
