@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) {
   date_str = year + '-' + month;
 
   var sql = 'SELECT `withdrawals`.*, \
-   `standards`.`name`, `bank_accounts`.`bank_account_name`, \
+   `standards`.`name`, `bank_accounts`.`bank_name`, \
    `bank_accounts`.`account_type`, `users`.`username` \
    FROM `withdrawals` \
    JOIN `users` ON `withdrawals`.`user_id`=`users`.`id` \

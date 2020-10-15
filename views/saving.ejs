@@ -18,40 +18,28 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>적금</td>
-            <td>하나_더_적금</td>
-            <td>메인_통장</td>
-            <td>123-456789-12345</td>
-            <td>하나은행</td>
-            <td>정액적립식</td>
-            <td>5.01%</td>
-            <td>1년</td>
-            <td>2021-02-03</td>
-            <td>300000원</td>
-            <td>600000원</td>
-            <td>600000원</td>
-            <td>이율 높은 적금</td>
-        </tr>
         <% dataList.forEach(function(item, index) { %>
         <tr>
             <td><%= item.id %></td>
             <td><%= item.type %></td>
             <td><%= item.name %></td>
-            <td><%= item.dealer %></td>
-            <td>하나_더_적금</td>
-            <td>메인_통장</td>
-            <td>123-456789-12345</td>
-            <td>하나은행</td>
-            <td>정액적립식</td>
-            <td>5.01%</td>
-            <td>1년</td>
-            <td>2021-02-03</td>
-            <td>300000원</td>
-            <td>600000원</td>
-            <td>600000원</td>
-            <td>이율 높은 적금</td>
+            <td><%= item.bank_account_name %></td>
+            <td><%= item.account_number %></td>
+            <td><%= item.bank_name %></td>
+            <td>
+                <% if(item.rate_type == 0){ %>
+                    정액적립식
+                <% } else if(item.rate_type == 1){ %>
+                    자유적립식
+                <% } %>
+            </td>
+            <td><%= item.rate %> %</td>
+            <td><%= item.term/12 +'년(' + item.term + '개월)' %> </td>
+            <td><%= item.expiration_date %></td>
+            <td><%= item.monthly_price %> 원</td>
+            <td><%= item.total_price %> 원</td>
+            <td><%= item.year_total_price %> 원</td>
+            <td><%= item.contents %></td>
         </tr>
         <%}); %>
 
