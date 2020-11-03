@@ -157,7 +157,11 @@
                     </div>
                     <div class="form-group">
                         <label for="dealer">구매처</label>
-                        <input type="input" class="form-control" id="dealer" name="dealer" placeholder="구매처">
+                        <select class="form-control" id="dealer_select_type" name="dealer_select_type">
+                            <option value="1">계좌 목록</option>
+                            <option value="2">직접 입력</option>
+                        </select>
+                        <select class="form-control" id="dealer" name="dealer" placeholder="구매처"></select>
                     </div>
                     <div class="form-group">
                         <label for="bank_account_id">계좌 이름</label>
@@ -218,6 +222,10 @@
                     </div>
                     <div class="form-group">
                         <label for="dealer">구매처</label>
+                        <select class="form-control" id="update_dealer_select_type" name="dealer_select_type">
+                            <option value="1">계좌 목록</option>
+                            <option value="2">직접 입력</option>
+                        </select>
                         <input type="input" class="form-control" id="update_dealer" name="dealer" placeholder="구매처">
                     </div>
                     <div class="form-group">

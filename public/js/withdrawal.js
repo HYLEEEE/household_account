@@ -68,14 +68,47 @@ function goDeleteSubmit(id) {
 
 
 $(function() {
-    $("#addModelBtn").click(function () {
-        getStandardsList();
-        getUsersList();
-        getBankAccountList();
+    $("#addModelBtn").on('click', function () {
+        // add 모달 띄울 때
+        getStandardsList('#standard_id');
+        getUsersList('#user_id');
+        getBankAccountList('#dealer')
+        getBankAccountList('#bank_account_id');
     });
+
+
+    $("#dealer_select_type").on('change', function () {
+        // 구매처 select이 변할 때
+        var value = $("#dealer_select_type");
+        console.log(value.val())
+        if(value.val() == 1){
+            $("#dealer").remove()
+            $("#dealer_select_type").parent().append(`<select class="form-control" id="dealer" name="dealer" placeholder="구매처"></select>`)
+            getBankAccountList('#dealer')
+        } else {
+            $("#dealer").remove()
+            $("#dealer_select_type").parent().append(`<input type="input" class="form-control" id="dealer" name="dealer" placeholder="구매처">`)
+        }
+    });
+
+    $("#update_dealer_select_type").on('change', function () {
+        // 구매처 select이 변할 때
+        var value = $("#update_dealer_select_type");
+        console.log(value.val())
+        if(value.val() == 1){
+            $("#update_dealer").remove()
+            $("#update_dealer_select_type").parent().append(`<select class="form-control" id="update_dealer" name="dealer" placeholder="구매처"></select>`)
+            getBankAccountList('#update_dealer')
+        } else {
+            $("#update_dealer").remove()
+            $("#update_dealer_select_type").parent().append(`<input type="input" class="form-control" id="update_dealer" name="dealer" placeholder="구매처">`)
+        }
+    });
+
 })
 
-function getStandardsList(){
+function getStandardsList(html_id_str){
+    // 기준값리스트 가져와서 뿌리기
     $.ajax({
         type: 'POST',
         url: '/standard',
@@ -83,18 +116,19 @@ function getStandardsList(){
             console.log(error)
         },
         success: function(result) {
-            $('#standard_id').empty();
+            $(html_id_str).empty();
             
             for(var count = 0; count < result.length; count++){                
                 var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+"</option>");
-                $('#standard_id').append(option);
+                $(html_id_str).append(option);
             }
         }
     });
 }
 
 
-function getUsersList(){
+function getUsersList(html_id_str){
+    // 유저리스트 가져와서 뿌리기
     $.ajax({
         type: 'POST',
         url: '/user',
@@ -102,18 +136,20 @@ function getUsersList(){
             console.log(error)
         },
         success: function(result) {
-            $('#user_id').empty();
+            $(html_id_str).empty();
             
             for(var count = 0; count < result.length; count++){                
                 var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+" : "+result[count]["username"]+"</option>");
-                $('#user_id').append(option);
+                $(html_id_str).append(option);
             }
         }
     });
 }
 
 
-function getBankAccountList(){
+function getBankAccountList(html_id_str){
+    // 계좌값 리스트 가져와서 뿌리기
+    console.log(html_id_str)
     $.ajax({
         type: 'POST',
         url: '/bank_account',
@@ -121,18 +157,25 @@ function getBankAccountList(){
             console.log(error)
         },
         success: function(result) {
-            $('#bank_account_id').empty();
+            $(html_id_str).empty();
+            console.log(result);
             
             for(var count = 0; count < result.length; count++){                
                 var option = $("<option value="+result[count]["id"]+" >"+result[count]["name"]+" : "+result[count]["account_number"]+"</option>");
-                $('#bank_account_id').append(option);
+                $(html_id_str).append(option);
             }
         }
     });
 }
 
 
+
+
+
+
+
 function getUpdateStandardsList(id){
+    
     $.ajax({
         type: 'POST',
         url: '/standard',
